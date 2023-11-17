@@ -1,0 +1,121 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
+
+.register-box {
+  width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 95%;
+  font-size: 14px;
+}
+
+select.form-control {
+  width: 100%;
+}
+
+.select-control {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 14px;
+  appearance: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #dc3545;
+}
+
+/* CSS cho radio button */
+.radio-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.radio-label {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-label input[type="radio"] {
+  display: none;
+}
+
+.radio-label::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  margin-right: 6px;
+  position: relative;
+  top: 2px;
+}
+
+.radio-label.selected::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* CSS cho checkbox đồng ý chính sách và điều khoản */
+.policy-checkbox {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.policy-checkbox input[type="checkbox"] {
+  width: 16px; /* Điều chỉnh chiều rộng của checkbox */
+  height: 16px; /* Điều chỉnh chiều cao của checkbox */
+  margin-right: 8px;
+}
+
+.policy-link {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.policy-link:hover {
+  text-decoration: underline;
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
