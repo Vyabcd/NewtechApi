@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
-//import Logo from "../assets/img/logo-dntu.webp";
 //import Background from "../assets/img/spkt1.npg";
 import { Link } from "react-router-dom";
 import Background1 from "../assets/img/bannerspkt.jpg"
@@ -14,10 +13,6 @@ const Banner = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundColor: "#fff",
-        /* Phù hợp nhất với phần nền, không bị mất phần ảnh */
-        //backgroundSize: 'contain',
-
-
         
       }}
     >

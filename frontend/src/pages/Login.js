@@ -31,11 +31,11 @@ function Login() {
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
   const [showErrorNotification, setShowErrorNotification] = useState(false);
 
-  // Kiểm tra xem người dùng đã đăng nhập hay chưa
-  // if (isLoggedIn) {
-  //   Nếu đã đăng nhập, chuyển hướng đến trang chính
-  //   return <Navigate to="/dashboard" />;
-  // }
+  //Kiểm tra xem người dùng đã đăng nhập hay chưa
+  if (isLoggedIn) {
+    //Nếu đã đăng nhập, chuyển hướng đến trang chính
+    return <Navigate to="/dashboard" />;
+  }
 
   async function handleLogin() {
     setErrors({});

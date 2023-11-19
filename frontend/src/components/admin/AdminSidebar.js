@@ -22,7 +22,7 @@ import {
   ExpandLess,
   ExpandMore,
 } from "@mui/icons-material";
-import Logo from "../../assets/img/logo-dntu.webp";
+import Logo from "../../assets/img/logo.png";
 import { useSelector } from "react-redux";
 
 const sidebarStyle = {
@@ -117,7 +117,7 @@ const AdminSidebar = ({ isAdmin = true }) => {
           ],
         },
         {
-          text: "Hoạt động NCKH",
+          text: "Danh sách đề tài",
           icon: <LocalActivityIcon />,
           link: "/admin/research-activities",
           children: [
@@ -273,7 +273,7 @@ const AdminSidebar = ({ isAdmin = true }) => {
                 lineHeight: "20px",
               }}
             >
-              Hệ thống Quản lý Nghiên cứu Khoa học
+              DASHBOARD
             </Typography>
           </div>
         </div>
@@ -335,10 +335,10 @@ const AdminSidebar = ({ isAdmin = true }) => {
           }}
         >
           <Divider />
-          <div style={{ padding: 12 }}>
+          {/* <div style={{ padding: 12 }}>
             <p style={captionStyle}>Khoa Công nghệ thông tin</p>
             <p style={captionStyle}>Trường Đại học Công nghệ Đồng Nai</p>
-          </div>
+          </div> */}
         </div>
       </Drawer>
     </div>

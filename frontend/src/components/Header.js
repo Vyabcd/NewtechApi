@@ -184,14 +184,14 @@ function Header() {
                   Manage activities
                 </Button>
 
-                {/* <Button
+                <Button
                   color="inherit"
                   className="header-button"
                   onClick={handleMenuOpen("menu4Anchor")}
                 >
                   Quản lý hoạt động NCKH
                 </Button>
-                <Menu
+                {/* <Menu
                   anchorEl={menuAnchors.menu4Anchor}
                   open={Boolean(menuAnchors.menu4Anchor)}
                   onClose={handleMenuClose("menu4Anchor")}

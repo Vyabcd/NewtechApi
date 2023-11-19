@@ -35,26 +35,26 @@ const StudentPortal = () => {
         }}
       >
         <h2 style={{ textAlign: "center", color: "#3f51b5" }}>
-          Cổng thông tin DNTU
+          TEXT
         </h2>
-        <p style={contentStyle}>Giảng viên DNTU</p>
-        <a href="https://qldt.dntu.edu.vn/" style={content}>
-          https://qldt.dntu.edu.vn
+        <p style={contentStyle}>text 1</p>
+        <a href="https://.vn/" style={content}>
+         
         </a>
         <Divider style={acontent} />
-        <p style={contentStyle}>Canvas Instructure</p>
-        <a href="https://dntu.instructure.com" style={content}>
-          https://dntu.instructure.com
+        <p style={contentStyle}>text 2</p>
+        <a href="https://.com" style={content}>
+          https://instructure.com
         </a>
         <Divider style={acontent} />
         <p style={contentStyle}>Elearning</p>
         <a href="https://elearning.dntu.edu.vn" style={content}>
-          https://elearning.dntu.edu.vn
+          https://edu.vn
         </a>
         <Divider style={acontent} />
-        <p style={contentStyle}>Facebook DNTU</p>
+        <p style={contentStyle}>Facebook</p>
         <a href="https://www.facebook.com/dntuedu" style={content}>
-          https://www.facebook.com/dntuedu
+          https://www.facebook.com/
         </a>
       </div>
     </div>

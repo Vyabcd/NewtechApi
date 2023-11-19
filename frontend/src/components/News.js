@@ -35,8 +35,8 @@ function News() {
     {
       date: "2023-10-16",
       title:
-        "Thông báo v/v Tham dự lễ tốt nghiệp dành cho Nghiên cứu sinh, Học viên cao học tốt nghiệp tháng 8-9 và sinh viên hệ chính quy tốt nghiệp đợt tháng 7-9/2023",
-      description: "Sinh viên xem thông báo v/v đăng ký dự lễ tốt nghiệp dành cho Nghiên cứu sinh, Học viên cao học tháng 8,10/2023 và Sinh viên hệ chính quy tốt nghiệp đợt tháng 07,09/2023.",
+        "TEXT 1",
+      description: "text 1",
       link: "#",
     },
     {
