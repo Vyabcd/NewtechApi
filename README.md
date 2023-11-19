@@ -6,7 +6,7 @@ Groip 11:
 
         20110356
 
-Install:
+Install: cd fronend
 
         npm install
 
