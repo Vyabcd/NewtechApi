@@ -216,7 +216,7 @@ function ResearchTopics() {
     const registrationData = {
       selectedTopics: selectedTopics.map((topic) => topic.id),
     };
-    fetch("http://localhost:8000/api/registration/", {
+    fetch(`${DEFAULT_BACKEND_URL}/research/topic/registration`, {
       method: "POST",
       body: JSON.stringify(registrationData),
       headers: {

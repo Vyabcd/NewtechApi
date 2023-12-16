@@ -45,28 +45,29 @@ function Login() {
     }
 
     try {
-      const response = await axios.post(`${DEFAULT_BACKEND_URL}/api/login/`, {
+      const response = await axios.post(`${DEFAULT_BACKEND_URL}/auth/login`, {
         username: username,
         password: password,
       });
 
-      handleLoginResponse(response);
+      handleLoginResponse(response.data);
     } catch (error) {
       handleLoginError(error);
     }
   }
 
   async function handleLoginResponse(response) {
+    console.log(response);
     if (response.data && response.data.token) {
       localStorage.setItem("token", response.data.token);
       console.log(response.data);
 
       try {
         const userProfileResponse = await axios.get(
-          `${DEFAULT_BACKEND_URL}/api/user-profile`,
+          `${DEFAULT_BACKEND_URL}/user/user-profile`,
           {
             headers: {
-              Authorization: `Token ${response.data.token}`,
+              Authorization: `Bearer ${response.data.token}`,
             },
           }
         );
