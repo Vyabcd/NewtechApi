@@ -1,11 +1,17 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
+const token = localStorage.getItem("token");
+
 /////////////////////////////////////////////////////////////////
 // Lấy danh sách các đối tượng
 const fetchData = async (url, setDataCallback, setNotificationCallback) => {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setDataCallback(response.data);
   } catch (error) {
     if (error.response) {
@@ -51,7 +57,11 @@ export const fetchDataById = async (
   setNotification
 ) => {
   try {
-    const response = await axios.get(`${apiEndpoint}/${objectId}/`);
+    const response = await axios.get(`${apiEndpoint}/${objectId}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setData(response.data);
   } catch (error) {
     console.error(
@@ -101,10 +111,18 @@ export const addUpdateData = async (
 
     if (data.id) {
       // Nếu đang cập nhật dữ liệu (có id)
-      await axios.put(`${url}/${data.id}/`, data);
+      await axios.put(`${url}/${data.id}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } else {
       // Nếu đang thêm dữ liệu mới
-      await axios.post(`${url}/`, data);
+      await axios.post(`${url}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
     setNotificationCallback({
       type: "success",
@@ -159,7 +177,11 @@ export const addData = async (
       });
     } else {
       // Nếu đang thêm dữ liệu mới
-      const response = await axios.post(`${url}/`, data);
+      const response = await axios.post(`${url}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.status === 201) {
         // Kiểm tra nếu yêu cầu thành công (status code 201 Created)
@@ -240,7 +262,11 @@ export const deleteDataById = async (
   fetchData
 ) => {
   try {
-    await axios.delete(`${apiEndpoint}/${objectId}/`);
+    await axios.delete(`${apiEndpoint}/${objectId}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setNotification({
       type: "success",
       message: "Xóa dữ liệu thành công",

@@ -49,7 +49,7 @@ function ResearchActivities() {
   async function fetchDataList() {
     try {
       await fetchData(
-        `${backendUrl}/api/research-activities/`,
+        `${backendUrl}/research/activities`,
         setDataList,
         setNotification
       );

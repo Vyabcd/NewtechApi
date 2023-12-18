@@ -80,6 +80,8 @@ function ResearchTopicsTable({
   exportDataExcel.push(headerRow);
   exportDataExcel.push(subheaderRow);
 
+  console.log(users);
+
   // Loop through the table rows and add data to the exportDataExcel array
   users.forEach((user, userIndex) => {
     const userRegistrations = getRegistrationsByUserID(
@@ -88,8 +90,8 @@ function ResearchTopicsTable({
     );
     userRegistrations.forEach((registration, registrationIndex) => {
       const topic = getTopicByID(data, registration?.topic);
-      const activity = topic
-        ? getActivityByID(researchActivities, topic.activity)
+      const activityId = topic
+        ? getActivityByID(researchActivities, topic.activityId)
         : "";
       const category = topic
         ? getCategoryByID(researchCategories, topic.category)
@@ -112,10 +114,10 @@ function ResearchTopicsTable({
         registrationIndex === 0 ? userIndex + 1 : "",
         registrationIndex === 0 ? registrant?.full_name : "",
         registrationIndex === 0 ? registrantPosition : "",
-        activity?.name || "",
-        category?.name || "",
+        // activity?.name || "",
+        // category?.name || "",
         getResearchHours(
-          activity?.id,
+          activityId?.id,
           category?.id,
           researchActivities,
           researchActivityDetails
@@ -135,7 +137,10 @@ function ResearchTopicsTable({
 
   useEffect(() => {
     setDataToExport([...exportDataExcel]);
-  }, [dataToExport]);
+  }, []);
+  // useEffect(() => {
+  //   setDataToExport([...exportDataExcel]);
+  // }, [dataToExport]);
 
   return (
     <TableContainer component={Paper}>
@@ -205,7 +210,7 @@ function ResearchTopicsTable({
               const rows = userRegistrations.length;
               const topic = getTopicByID(data, registration?.topic);
               const activity = topic
-                ? getActivityByID(researchActivities, topic.activity)
+                ? getActivityByID(researchActivities, topic.activityid)
                 : "";
               const category = topic
                 ? getCategoryByID(researchCategories, topic.category)
@@ -300,7 +305,7 @@ function ResearchTopicsTable({
                     <Button
                       variant="text"
                       sx={iconButtonStyle}
-                      color="primary"
+                      color="primary" 
                       size="small"
                       onClick={() => handleEditSubmission(topic?.id)}
                       startIcon={

@@ -66,18 +66,18 @@ function Profile() {
     const fetchDataFromServer = async () => {
       try {
         const response = await fetch(
-          `${DEFAULT_BACKEND_URL}/api/user-profile`,
+          `${DEFAULT_BACKEND_URL}/user/user-profile`,
           {
             method: "GET",
             headers: {
-              Authorization: `Token ${storedToken}`,
+              Authorization: `Bearer ${storedToken}`,
             },
           }
         );
 
         if (response.ok) {
           const userDataFromServer = await response.json();
-          setUserData(userDataFromServer);
+          setUserData(userDataFromServer.data);
           setIsLoading(false);
         } else {
           const errorData = await response.json();

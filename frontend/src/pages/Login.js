@@ -22,8 +22,8 @@ function Login() {
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("123456a@");
   const [userData, setUserData] = useState(null);
 
   const [errors, setErrors] = useState({});
@@ -84,6 +84,7 @@ function Login() {
 
   function handleUserProfileResponse(userProfileResponse) {
     if (userProfileResponse) {
+      userProfileResponse.data.role = "admin"
       setUserData(userProfileResponse.data);
       localStorage.setItem(
         "userData",

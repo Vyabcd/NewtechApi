@@ -57,7 +57,7 @@ function Users() {
   // Gửi HTTP request để lấy danh sách tài khoản từ backend
   async function fetchUsers() {
     try {
-      await fetchData(`${backendUrl}/api/users/`, setUsers, setNotification);
+      await fetchData(`${backendUrl}/admin/user/users`, setUsers, setNotification);
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +97,7 @@ function Users() {
   const handleDeleteUser = async (userId) => {
     try {
       await deleteDataById(
-        `${backendUrl}/api/user`,
+        `${backendUrl}/admin/user/:id`,
         userId,
         setNotification,
         fetchUsers
@@ -111,7 +111,7 @@ function Users() {
   const handleEditUser = async (user) => {
     try {
       await fetchDataById(
-        `${backendUrl}/api/user`,
+        `${backendUrl}/admin/user/:id`,
         user.id,
         setEditingUser,
         setNotification
@@ -129,7 +129,7 @@ function Users() {
       if (editingUser) {
         // Nếu đang chỉnh sửa tài khoản
         await addUpdateData(
-          `${backendUrl}/api/user`,
+          `${backendUrl}/admin/user/:id`,
           editingUser,
           "Cập nhật tài khoản thành công",
           fetchUsers,
@@ -139,7 +139,7 @@ function Users() {
       } else {
         // Nếu đang thêm mới tài khoản
         await addUpdateData(
-          `${backendUrl}/api/user`,
+          `${backendUrl}/admin/user/:id`,
           newUser,
           "Thêm tài khoản thành công",
           fetchUsers,
@@ -155,7 +155,7 @@ function Users() {
   // Xử lý khi thay đổi trạng thái tài khoản
   const handleToggleActive = async (user) => {
     try {
-      await axios.patch(`${backendUrl}/api/users/${user.id}/toggle-active/`);
+      await axios.patch(`${backendUrl}/admin/user/users${user.id}/admin/user/active/:id`);
       setNotification({
         type: "success",
         message: "Cập nhật trạng thái hoạt động thành công",

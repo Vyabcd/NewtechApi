@@ -51,11 +51,11 @@ const Account = () => {
             onClick={handleAccountMenuOpen}
           >
             <Avatar
-              alt={userData.username}
-              src={userData.profile_picture}
+              alt={userData.data.username}
+              src={userData.data.profile_picture}
               sx={{ width: 36, height: 36, marginRight: "8px" }}
             />
-            <Typography fontSize={14}>{`${userData.full_name}`}</Typography>
+            <Typography fontSize={14}>{`${userData.data.full_name}`}</Typography>
           </Button>
 
           <Menu

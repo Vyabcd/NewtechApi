@@ -46,12 +46,13 @@ function ResearchTopicAddEditForm({
     }));
 
     if (editingTopic) {
-      // Nếu đang chỉnh sửa đề tài
-      setEditingTopic((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    } else {
+    //   // Nếu đang chỉnh sửa đề tài
+    //   setEditingTopic((prevState) => ({
+    //     ...prevState,
+    //     [name]: value,
+    //   }));
+    // } 
+    // else {
       // Nếu đang thêm đề tài mới
       setNewTopic((prevState) => ({
         ...prevState,

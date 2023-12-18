@@ -20,39 +20,31 @@ import fetchData, {
 } from "../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-
+import axios from "axios";
 function ResearchTopicsManager() {
   const backendUrl = DEFAULT_BACKEND_URL;
   const userData = useSelector((state) => state.user.userData);
 
   const defaultResearchTopic = {
-    name: "Chưa nhập",
-    activity: 1,
-    category: 1,
-    authors: [userData?.id],
-    description: "",
-    abstract: "",
-    approved_budget: 0,
-    approved_hours: 0,
-    completion_status: "in_progress",
+    name: "Testtopic",
+    activityId: "09743399-b536-41f1-9c82-b6c21fefaafb",
+    approved_budget: 100000,
+    approved_hours: 100,
     research_resources: [],
   };
   const defaultResearchTopicRegistration = {
-    topic: 1,
-    registrant: userData?.id,
-    registered_date: dayjs().format("YYYY-MM-DD"),
-    expected_budget: 0,
-    expected_hours: 0,
-    approval_status: "pending",
-    registration_approver: userData?.id,
-    registration_approved_date: dayjs().format("YYYY-MM-DD"),
+    id: "",
+    name: "Testtopic",
+    approved_budget: 100000,
+    approved_hours: 100,
+    completion_status: "in_progress"
   };
   const defaultResearchTopicSubmission = {
-    topic: 0,
-    submission_date: dayjs().format("YYYY-MM-DD"),
-    submission_approver: 1,
-    submission_approved_date: dayjs().format("YYYY-MM-DD"),
-    approval_status: "pending",
+    id: "",
+    name: "Testtopic",
+    approved_budget: 100000,
+    approved_hours: 100,
+    completion_status: "in_progress"
   };
   const [researchTopics, setResearchTopics] = useState([]);
   const [users, setUsers] = useState([]);
@@ -95,58 +87,116 @@ function ResearchTopicsManager() {
   const [dataToExport, setDataToExport] = useState([]);
 
   // Gửi HTTP request để lấy danh sách đề tài từ backend
+  // const fetchResearchTopics = () =>
+  //   fetchData(
+  //     `${backendUrl}/admin/research/topics`,
+  //     setResearchTopics,
+  //     setNotification
+  //   );
   const fetchResearchTopics = () =>
-    fetchData(
-      `${backendUrl}/api/research-topics/`,
-      setResearchTopics,
-      setNotification
-    );
+  fetchData(
+    `${backendUrl}/admin/research/topic/all`,
+    setResearchTopics,
+    setNotification
+  );
 
+
+  // const fetchResearchTopicRegistrations = () =>
+  //   fetchData(
+  //     `${backendUrl}/admin/research/topic-registration/filter/all`,
+  //     setResearchTopicRegistrations,
+  //     setNotification
+  //   );
   const fetchResearchTopicRegistrations = () =>
-    fetchData(
-      `${backendUrl}/api/research-topic-registrations/`,
-      setResearchTopicRegistrations,
-      setNotification
-    );
+  fetchData(
+    `${backendUrl}/research/topic/registration`,
+    setResearchTopicRegistrations,
+    setNotification
+  );
 
+  // const fetchResearchTopicSubmissions = () =>
+  //   fetchData(
+  //     `${backendUrl}/research/topic-submission`,
+  //     setResearchTopicSubmissions,
+  //     setNotification
+  //   );
   const fetchResearchTopicSubmissions = () =>
-    fetchData(
-      `${backendUrl}/api/research-topic-submissions/`,
-      setResearchTopicSubmissions,
-      setNotification
-    );
-
+  fetchData(
+    `${backendUrl}/research/topic-submission`,
+    setResearchTopicSubmissions,
+    setNotification
+  );
+  const token = localStorage.getItem("token");
   // Sử dụng useEffect để tự động gọi hàm fetchResearchTopics khi component được tạo
+  // useEffect(() => {
+  //   fetchResearchTopics();
+  //   fetchResearchTopicRegistrations();
+  //   fetchResearchTopicSubmissions();
   useEffect(() => {
+    const fetchResearchTopics = async() => {
+      await axios.get(`${backendUrl}/admin/research/topic/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => setResearchTopics(response.data.data));
+    }
     fetchResearchTopics();
-    fetchResearchTopicRegistrations();
-    fetchResearchTopicSubmissions();
-    fetchData(
-      `${backendUrl}/api/research-types/`,
-      setResearchTypes,
-      setNotification
-    );
-    fetchData(
-      `${backendUrl}/api/research-activities/`,
-      setResearchActivities,
-      setNotification
-    );
-    fetchData(
-      `${backendUrl}/api/research-activity-categories/`,
-      setResearchCategories,
-      setNotification
-    );
-    fetchData(
-      `${backendUrl}/api/research-activity-details/`,
-      setResearchActivityDetails,
-      setNotification
-    );
-    fetchData(`${backendUrl}/api/users/`, setUsers, setNotification);
-    fetchData(
-      `${backendUrl}/api/academic-profiles/`,
-      setAcademicProfiles,
-      setNotification
-    );
+
+    const fetchResearchTopicRegistrations = async() => {
+      await axios.post(`${backendUrl}/research/topic/registration`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => setResearchTopicRegistrations(response.data));
+    }
+    // fetchResearchTopicRegistrations()
+
+    const fetchResearchTopicSubmissions = async() => {
+      await axios.get(`${backendUrl}/research/topic-submission`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => setResearchTopicSubmissions(response.data));
+    }
+    // fetchData(
+    //   `${backendUrl}/api/research-types/`,
+    //   setResearchTypes,
+    //   setNotification
+    // );
+    // fetchData(
+    //   `${backendUrl}/research/activities`,
+    //   setResearchActivities,
+    //   setNotification
+    // );
+    // fetchData(
+    //   `${backendUrl}/api/research-activity-categories/`,
+    //   setResearchCategories,
+    //   setNotification
+    // );
+    // fetchData(
+    //   `${backendUrl}/api/research-activity-details/`,
+    //   setResearchActivityDetails,
+    //   setNotification
+    // );
+    // fetchData(`${backendUrl}/user/user-profile`, setUsers, setNotification);
+    const fetchUser = async()=> {
+      try {
+        const response = await axios.get(`${backendUrl}/admin/user/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data.listData);
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách người dùng:", error);
+      }
+    }
+    fetchUser()
+    // fetchData(
+    //   `${backendUrl}/api/academic-profiles/`,
+    //   setAcademicProfiles,
+    //   setNotification
+    // );
   }, []);
 
   // Mở modal hiển thị form thêm/sửa đề tài
@@ -212,7 +262,7 @@ function ResearchTopicsManager() {
   // Xử lý khi người dùng muốn xóa đề tài
   const handleDeleteResearchTopic = (researchTopicId) => {
     deleteDataById(
-      `${backendUrl}/api/research-topic`,
+      `${backendUrl}/research/topic/:id`,
       researchTopicId,
       setNotification,
       fetchResearchTopics
@@ -223,7 +273,7 @@ function ResearchTopicsManager() {
   // Xử lý khi người dùng muốn chỉnh sửa đề tài
   const handleEditItem = (researchTopicId) => {
     fetchDataById(
-      `${backendUrl}/api/research-topic`,
+      `${backendUrl}/admin/research/topic`,
       researchTopicId,
       setEditingResearchTopic,
       setNotification
@@ -233,7 +283,7 @@ function ResearchTopicsManager() {
 
   const handleEditResearchTopic = (researchTopicId) => {
     fetchDataById(
-      `${backendUrl}/api/research-topic`,
+      `${backendUrl}/admin/research/topic`,
       researchTopicId,
       setEditingResearchTopic,
       setNotification
@@ -243,7 +293,7 @@ function ResearchTopicsManager() {
 
   const handleEditRegistration = (researchTopicId) => {
     fetchDataById(
-      `${backendUrl}/api/research-topic`,
+      `${backendUrl}/admin/research/topic`,
       researchTopicId,
       setEditingResearchTopic,
       setNotification
@@ -253,7 +303,7 @@ function ResearchTopicsManager() {
 
   const handleEditSubmission = (researchTopicId) => {
     fetchDataById(
-      `${backendUrl}/api/research-topic`,
+      `${backendUrl}/admin/research/topic`,
       researchTopicId,
       setEditingResearchTopic,
       setNotification
@@ -263,7 +313,7 @@ function ResearchTopicsManager() {
 
   const handleSubmitTopic = async (e) => {
     e.preventDefault();
-    const url = `${backendUrl}/api/research-topic`;
+    const url = `${backendUrl}/admin/research/topic`;
     const successMessage = editingResearchTopic
       ? "Cập nhật đề tài thành công"
       : "Thêm đề tài thành công";
@@ -284,7 +334,7 @@ function ResearchTopicsManager() {
 
   const handleSubmitRegistration = async (e) => {
     e.preventDefault();
-    const url = `${backendUrl}/api/research-topic-registration`;
+    const url = `${backendUrl}/admin/research/topic-registration`;
     const successMessage = editingResearchTopicRegistration
       ? "Cập nhật thông tin đăng ký thành công"
       : "Thêm thông tin đăng ký thành công";
@@ -302,7 +352,7 @@ function ResearchTopicsManager() {
 
   const handleSubmitSubmission = async (e) => {
     e.preventDefault();
-    const url = `${backendUrl}/api/research-topic-submission`;
+    const url = `${backendUrl}/research/topic-submission`;
     const successMessage = editingResearchTopicSubmission
       ? "Cập nhật thông tin đăng ký thành công"
       : "Thêm thông tin đăng ký thành công";
